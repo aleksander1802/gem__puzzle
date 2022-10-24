@@ -190,9 +190,7 @@ window.addEventListener('DOMContentLoaded', function() {
         for (let i = 0; i < arr.length; i++) {            
             destiny += `<div class='destiny__item' data-number='${i}'>${arr[i]}x${arr[i]}</div>`
         } 
-        
-        
-        
+
         let gameBlock =  container.innerHTML += `
         <div class='destiny__choose'>Choose your destiny: ${destiny}</div>
         <div class='destiny'>Frame size: ${num}x${num}</div>
@@ -208,12 +206,27 @@ window.addEventListener('DOMContentLoaded', function() {
     const puzzle = document.querySelector('.puzzle');        
 
     puzzle.innerHTML = '';
+
+
+    // const step = () => {
+
+    //     const buttons = document.querySelector('.buttons');
+
+    //     const countDiv = document.createElement('div');
+    //     countDiv.classList.add('count')        
+    //     buttons.after(countDiv)
+
+    // }
+
+    // step()
+
+    
         
     const reloadCLass = () => {          
         
+                
         const move = (target, zeroTarget) => {
-
-        
+            
             let targetCord = {
                 x : Math.round(target.getBoundingClientRect().x),
                 y : Math.round(target.getBoundingClientRect().y)
@@ -222,19 +235,15 @@ window.addEventListener('DOMContentLoaded', function() {
             let zeroCord = {
                 x: Math.round(zeroTarget.getBoundingClientRect().x),
                 y: Math.round(zeroTarget.getBoundingClientRect().y)
-            }
-        
+            }        
             
             let size = target.offsetWidth * 1.5;
             let data =  target.dataset.number; 
             
-            const replace = () => {
-                
-                
+            const replace = () => { 
     
                 data = target.dataset.number;  
-                size = target.offsetWidth * 1.5; 
-    
+                size = target.offsetWidth * 1.5;     
     
                 targetCord.x = Math.round(target.getBoundingClientRect().x);
                 targetCord.y = Math.round(target.getBoundingClientRect().y);
@@ -245,11 +254,9 @@ window.addEventListener('DOMContentLoaded', function() {
                  
                 let deltaX = Math.abs(zeroCord.x - targetCord.x);
                 let deltaY = Math.abs(zeroCord.y - targetCord.y);
-    
                 
-                       
-                const change = () => {
-    
+                const change = () => {  
+                                     
                     target.setAttribute("data-number", "0");
                     target.classList.remove("puzzle__item");
                     target.classList.add("empty");
@@ -258,31 +265,25 @@ window.addEventListener('DOMContentLoaded', function() {
                     zero.classList.remove("empty");
                     zero.classList.add("puzzle__item");
                     zero.innerText = data; 
-                    
+                                      
                 }
                 
                 
                 if(deltaY == 0 || deltaY == 1 && deltaX <= size) {
-                    change(); 
-                    count += 1               
+                     change();                                       
                  }
                 
                 if(deltaX == 0 || deltaX == 1 && deltaY <= size) {
-                    change();
-                    count += 1
+                     change();                  
                 }
-    
-                
-                console.log(count);
-        }
-            replace();          
-    
+            }
             
-        } 
+             replace();    
+            
+            
+        }         
 
         let zero = document.querySelector('.empty');
-
-        let count = 0;
 
         const puzzle = document.querySelector('.puzzle'); 
 
@@ -290,22 +291,21 @@ window.addEventListener('DOMContentLoaded', function() {
 
             const puzzle = document.querySelector('.puzzle');
 
-            let currentArray = [...Array(puzzle.childElementCount)].map((_, i) => i + 1).join(', ').replace(`${puzzle.childElementCount}`, '0');   
-            
+            let currentArray = [...Array(puzzle.childElementCount)].map((_, i) => i + 1).join(', ').replace(`${puzzle.childElementCount}`, '0');  
             console.log(currentArray);
 
             let compareArray = []
-            
-            
 
              for (let i = 0; i < puzzle.childElementCount; i++) {
                 let item = puzzle.childNodes[i].dataset.number
                 compareArray.push(item)
              }
+
+             let winArray = compareArray.join(', ')
+             console.log(winArray);
     
-             return compareArray.join(', ') === currentArray
-        }            
-                 
+             return winArray === currentArray && winArray.length > 0 && currentArray.length > 0
+        }        
         
         const puz = (e) => { 
     
@@ -313,16 +313,16 @@ window.addEventListener('DOMContentLoaded', function() {
             
              
             if (target.classList.contains('empty')) {
-                return
+                return 0
             }
             
-            zero = document.querySelector('.empty');       
-            move(target, zero);
+            zero = document.querySelector('.empty');
+              
+            return move(target, zero);  
             
             
-        
         }
-
+        
         const win = () => { // в случае победы появляется гифка и кнопка начать заново
             const container = document.querySelector('.container');
             container.innerHTML = '';
@@ -331,17 +331,30 @@ window.addEventListener('DOMContentLoaded', function() {
             container.innerHTML += `<div><img class='victory__gif' src="styles/img/victory.gif" alt="victory gif" /></div>
             <input type='button' value="Try again" class='button__win' onClick="location.href=location.href"></input>`
         }
-    
-        puzzle.addEventListener('click', (e) => { // слушатель, обрабатывает клики, кажды раз вызывает функцию compare которая сравнивает значени изначального массива и массива который получаетя при движении плиток, в случае победы вызывает функцию win, та что выше
-            puz(e)
-           console.log(compare() ? win() : 'NoN' ); 
+        
+         puzzle.addEventListener('click', (e)  => { // слушатель, обрабатывает клики, кажды раз вызывает функцию compare которая сравнивает значение изначального массива и массива который получаетя при движении плиток, в случае победы вызывает функцию win, та что выше
+            
+            puz(e); 
+            let winCompare = compare()
+            console.log(winCompare);
+            winCompare ? win() : 'NoN'; 
+            
         })
+
+        
+        
     }    
-    reloadCLass()
+
+    reloadCLass();
+    
+    
+     
+
+    
 
 
 
-    const shuffle = (num = 4) => {
+    const shuffle = (num) => {
 
         const puzzle = document.querySelector('.puzzle');        
 
@@ -353,7 +366,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
                 const checkSolve = (num, summary) => {
 
-                    const recursionShuffle = (num = 4, summary) => {
+                    const recursionShuffle = (num, summary) => {
 
                         let count = num;
                         let sum = 0;
@@ -382,7 +395,7 @@ window.addEventListener('DOMContentLoaded', function() {
             
                             shuffleArray = array;   
                             
-                            console.log(shuffleArray);
+                            
             
                             return shuffleArray
                             
@@ -404,7 +417,7 @@ window.addEventListener('DOMContentLoaded', function() {
                                 }
                                 });
                                 }
-                                console.log(row);
+                                
                                 return row;
                         }
 
@@ -415,7 +428,7 @@ window.addEventListener('DOMContentLoaded', function() {
                             
                             
                             shuffleArray = shuffleItemArray(summaryNumber)
-                            console.log(shuffleArray);
+                            
                               for (let i = 0; i < count; i++) {
                                 if(i != 0) {
                                   for (let j = i+1; j <=count; j++) {
@@ -429,10 +442,10 @@ window.addEventListener('DOMContentLoaded', function() {
                         if(count % 2 == 0) {
     
                           zeroPosition = getZeroPosition(shuffleArray, count);
-                          console.log(zeroPosition);                     
+                                             
                           
                           res =  sum + zeroPosition;    
-                          console.log(res);                  
+                                         
                           if(res % 2 == 0) {
     
                             result = 1;   
@@ -484,7 +497,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
     }
 
-    shuffle(num = 4)
+    shuffle(num)
 
     const shuffleItem = (number) => {
 
@@ -492,8 +505,10 @@ window.addEventListener('DOMContentLoaded', function() {
 
         shuffleButton.addEventListener('click', () => {
             
-            shuffle(number)    
-                    
+             
+            
+            shuffle(number) 
+            
         })
         
     }
@@ -501,10 +516,15 @@ window.addEventListener('DOMContentLoaded', function() {
     const shuffleButton = document.querySelector('.buttons__shuffle');        
 
         shuffleButton.addEventListener('click', () => {
+
             
-            shuffle()    
-                    
+            shuffle(num)   
+            
         })
+
+
+
+    
 
    
     
@@ -513,25 +533,27 @@ window.addEventListener('DOMContentLoaded', function() {
         
         let classArray = ['puzzle__small', 'puzzle__default', 'puzzle__medium', 'puzzle__large', 'puzzle__super', 'puzzle__mega'];
         let index = 0;
+        
         const puzzle = document.querySelector('.puzzle');
         
         const destinyItems = document.querySelectorAll('.destiny__item');
         const destinyChoose = document.querySelector('.destiny__choose');
         const destiny = document.querySelector('.destiny');
-
+        
         destinyItems.forEach(item => {
         
         item.addEventListener('click', (e) => {
             
             const target = +e.target.dataset.number            
-            console.log(target);
+            
             puzzle.remove();
             destinyChoose.remove();
             destiny.remove();
             game(target + 3, classArray[index + target])
             shuffleItem(target + 3)
             returnItems()
-            reloadCLass()
+            console.log(reloadCLass());
+            
             
         })
     })
