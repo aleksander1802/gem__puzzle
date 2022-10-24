@@ -1,0 +1,27 @@
+.destiny {    
+    width: 100%;
+    text-align: center;
+    padding: 20px;
+    font-size: 30px;
+    &__choose {
+        
+        padding: 20px;
+        font-size: 30px;
+        text-align: center;
+        display: flex;
+        flex-direction: row;
+    }
+    &__item {
+        cursor: pointer;
+        margin-left: 10px;
+        border: 1px solid black;
+        &:hover {            
+            color: white;
+            background-color: black;
+        }
+        &:active {
+            background-color:cyan;
+            color: black;
+        }
+    }
+}

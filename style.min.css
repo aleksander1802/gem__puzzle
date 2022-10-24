@@ -1,0 +1,241 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+* {
+  font-family: "Roboto";
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  width: 100%;
+  max-width: 100%;
+  overflow-x: hidden;
+}
+
+body {
+  width: 100%;
+  height: 100vh;
+}
+
+.container {
+  width: 80%;
+  height: 100%;
+  padding: 20px;
+  margin: 0 auto;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  -ms-flex-wrap: wrap;
+      flex-wrap: wrap;
+}
+
+.main {
+  width: auto;
+  margin: 0;
+}
+
+.puzzle {
+  display: grid;
+  width: auto;
+  height: auto;
+  border: 1px solid black;
+  background-color: lightslategray;
+  -webkit-box-shadow: 0 0 10px 3px rgb(0, 0, 0);
+          box-shadow: 0 0 10px 3px rgb(0, 0, 0);
+}
+.puzzle__item {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+  width: 90%;
+  height: 90%;
+  min-width: 35px;
+  min-height: 35px;
+  cursor: pointer;
+  margin: auto;
+  -webkit-box-align: center;
+      -ms-flex-align: center;
+          align-items: center;
+  font-size: 150%;
+  -webkit-box-pack: center;
+      -ms-flex-pack: center;
+          justify-content: center;
+  border: 1px solid black;
+  background-color: white;
+}
+.puzzle__small {
+  grid-template-columns: repeat(3, 110px);
+  grid-template-rows: repeat(3, 110px);
+}
+.puzzle__default {
+  grid-template-columns: repeat(4, 100px);
+  grid-template-rows: repeat(4, 100px);
+}
+.puzzle__medium {
+  grid-template-columns: repeat(5, 90px);
+  grid-template-rows: repeat(5, 90px);
+}
+.puzzle__large {
+  grid-template-columns: repeat(6, 90px);
+  grid-template-rows: repeat(6, 90px);
+}
+.puzzle__super {
+  grid-template-columns: repeat(7, 80px);
+  grid-template-rows: repeat(7, 80px);
+}
+.puzzle__mega {
+  grid-template-columns: repeat(8, 70px);
+  grid-template-rows: repeat(8, 70px);
+}
+
+.empty {
+  width: 90%;
+  height: 90%;
+  min-width: 50px;
+  min-height: 50px;
+  -webkit-box-shadow: none;
+          box-shadow: none;
+  margin: auto;
+  position: relative;
+  z-index: 2;
+  background-color: transparent;
+}
+
+.btn {
+  background-color: cyan;
+  border: 1px solid black;
+  width: 150px;
+  height: 40px;
+  border-radius: 2px;
+  cursor: pointer;
+}
+.btn:hover {
+  background-color: black;
+  color: white;
+}
+.btn:active {
+  background-color: transparent;
+  color: black;
+}
+
+.buttons {
+  width: 100%;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-wrap: nowrap;
+      flex-wrap: nowrap;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
+  padding-top: 20px;
+  padding-bottom: 50px;
+}
+.buttonStart {
+  width: 200px;
+  height: 100px;
+  border: none;
+  margin: 0 auto;
+  font-size: 30px;
+  cursor: pointer;
+}
+.buttonStart:hover {
+  background-color: black;
+  color: white;
+}
+.buttonStart:active {
+  background-color: cyan;
+  color: black;
+}
+
+.button__win {
+  display: block;
+  margin: 20px;
+  width: 200px;
+  height: 40px;
+  background-color: cyan;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.button__win:hover {
+  background-color: black;
+  color: white;
+}
+.button__win:active {
+  background-color: cyan;
+  color: black;
+}
+
+.destiny {
+  width: 100%;
+  text-align: center;
+  padding: 20px;
+  font-size: 30px;
+}
+.destiny__choose {
+  padding: 20px;
+  font-size: 30px;
+  text-align: center;
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-orient: horizontal;
+  -webkit-box-direction: normal;
+      -ms-flex-direction: row;
+          flex-direction: row;
+}
+.destiny__item {
+  cursor: pointer;
+  margin-left: 10px;
+  border: 1px solid black;
+}
+.destiny__item:hover {
+  color: white;
+  background-color: black;
+}
+.destiny__item:active {
+  background-color: cyan;
+  color: black;
+}
+
+@media (max-width: 767px) {
+  .buttons {
+    -webkit-box-orient: vertical;
+    -webkit-box-direction: normal;
+        -ms-flex-direction: column;
+            flex-direction: column;
+    -webkit-box-align: center;
+        -ms-flex-align: center;
+            align-items: center;
+    height: 170px;
+  }
+  .puzzle__default {
+    grid-template-columns: repeat(4, 95px);
+    grid-template-rows: repeat(4, 95px);
+  }
+}
+@media (max-width: 389px) {
+  .puzzle__default {
+    grid-template-columns: repeat(4, 60px);
+    grid-template-rows: repeat(4, 60px);
+  }
+}
+.hide {
+  display: none;
+}
+
+.victory__gif {
+  padding-top: 40px;
+  -o-object-fit: contain;
+     object-fit: contain;
+  width: 100%;
+  height: 100%;
+  min-height: 200px;
+  min-width: 200px;
+}/*# sourceMappingURL=style.min.css.map */

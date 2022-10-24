@@ -1,0 +1,60 @@
+.puzzle {    
+    display: grid;
+    width: auto;
+    height: auto;
+    border: 1px solid black;
+    background-color: lightslategray;
+    box-shadow: 0 0 10px 3px rgb(0, 0, 0);    
+    &__item {
+        display: flex;
+        flex-direction: row;
+        width: 90%;
+        height: 90%;
+        min-width: 35px;
+        min-height: 35px;
+        cursor: pointer;
+        margin: auto;
+        align-items: center;
+        font-size: 150%;
+        justify-content: center;
+        border: 1px solid black;
+        //box-shadow: 0 0 10px 1px rgb(0, 0, 0);
+        background-color: white;
+    }
+    &__small {
+        grid-template-columns: repeat(3, 110px);
+        grid-template-rows: repeat(3, 110px);
+    }
+    &__default {
+        grid-template-columns: repeat(4, 100px);
+        grid-template-rows: repeat(4, 100px);
+    }
+    &__medium {
+        grid-template-columns: repeat(5, 90px);
+        grid-template-rows: repeat(5, 90px);
+    }
+    &__large {
+        grid-template-columns: repeat(6, 90px);
+        grid-template-rows: repeat(6, 90px);
+    }
+    &__super {
+        grid-template-columns: repeat(7, 80px);
+        grid-template-rows: repeat(7, 80px);
+    }
+    &__mega {
+        grid-template-columns: repeat(8, 70px);
+        grid-template-rows: repeat(8, 70px);
+    }
+}
+
+.empty {
+    width: 90%;
+    height: 90%;
+    min-width: 50px;
+    min-height: 50px;    
+    box-shadow: none;
+    margin: auto;
+    position: relative;
+    z-index: 2;
+    background-color: transparent;
+}
