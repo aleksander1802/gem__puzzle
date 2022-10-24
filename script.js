@@ -41,30 +41,32 @@ window.addEventListener('DOMContentLoaded', function() {
     
     
     const game = (num = 4, className = 'puzzle__default') => {
-        const shuffleButton = document.querySelector('.buttons__shuffle');   
+         
         const container = document.querySelector('.container')
+        let sum = num
 
-        const shuffle = (num = 4, className) => {
+        const shuffle = (num = 4) => {
             
-            let sum = num * num
+            let summary = num * num
             let items = [];   
 
             
     
-            const valid = (num) => {
+            const valid = (num, summary) => {
     
-                    const checkSolve = () => {
+                    const checkSolve = (num, summary) => {
     
-                        const recursionShuffle = () => {
+                        const recursionShuffle = (num = 4, summary) => {
     
-                            let count = 4;
+                            let count = num;
                             let sum = 0;
                             let result = 0;  
+                            let summaryNumber = summary;
     
                             let shuffleArray;
     
-                            const shuffleItemArray = () => {
-                                let sum = 16;
+                            const shuffleItemArray = (summaryNumber) => {
+                                let sum = summaryNumber;
                                 let validArray = [] 
                         
                                 for (let i = 0; i < sum; i++) {
@@ -81,17 +83,15 @@ window.addEventListener('DOMContentLoaded', function() {
                                 array[randomNumber] = currentnumber;
                                 }
                 
-                                shuffleArray = array;   
-                                
-                                console.log(shuffleArray);
+                                shuffleArray = array;  
                 
                                 return shuffleArray
                                 
                             };
         
         
-                            const getZeroPosition = (shuffleArray) => {
-                                let count = 4;
+                            const getZeroPosition = (shuffleArray, fieldSize) => {
+                                let count = fieldSize;
                                 let copyArray = [...shuffleArray];
                                 let row;
                                 let resultArray = [];
@@ -105,7 +105,7 @@ window.addEventListener('DOMContentLoaded', function() {
                                     }
                                     });
                                     }
-                                    console.log(row);
+                                    
                                     return row;
                             }
     
@@ -115,8 +115,7 @@ window.addEventListener('DOMContentLoaded', function() {
                             while (result == 0) {
                                 
                                 
-                                shuffleArray = shuffleItemArray()
-                                console.log(shuffleArray);
+                                shuffleArray = shuffleItemArray(summaryNumber)                                
                                   for (let i = 0; i < count; i++) {
                                     if(i != 0) {
                                       for (let j = i+1; j <=count; j++) {
@@ -129,11 +128,10 @@ window.addEventListener('DOMContentLoaded', function() {
                     
                             if(count % 2 == 0) {
         
-                              zeroPosition = getZeroPosition(shuffleArray);
-                              console.log(zeroPosition);                     
+                              zeroPosition = getZeroPosition(shuffleArray, count);
                               
                               res =  sum + zeroPosition;    
-                              console.log(res);                  
+                                           
                               if(res % 2 == 0) {
         
                                 result = 1;   
@@ -156,19 +154,19 @@ window.addEventListener('DOMContentLoaded', function() {
                         }
     
                         
-                        return recursionShuffle();
+                        return recursionShuffle(num, summary);
                       
                     }
                   
                   
-                return checkSolve()
+                return checkSolve(num , summary)
     
             }
             
     
-            let arrayValidationTrue = valid()        
+            let arrayValidationTrue = valid(num, summary)        
     
-            for (let i = 0; i < sum; i++) {            
+            for (let i = 0; i < summary; i++) {            
     
                 arrayValidationTrue[i] === 0 ? items.push(`<div class='empty' data-number='${arrayValidationTrue[i]}'></div>`) : items.push(`<div class='puzzle__item' data-number='${arrayValidationTrue[i]}'>${arrayValidationTrue[i]}</div>`)
             } 
@@ -198,14 +196,14 @@ window.addEventListener('DOMContentLoaded', function() {
         let gameBlock =  container.innerHTML += `
         <div class='destiny__choose'>Choose your destiny: ${destiny}</div>
         <div class='destiny'>Frame size: ${num}x${num}</div>
-        <div class="puzzle ${className}">${shuffle()}</div>`       
+        <div class="puzzle ${className}">${shuffle(sum)}</div>`       
 
         return gameBlock
 
     }
         
     
-    game()
+    game(num  = 4, className = 'puzzle__default')
     
     const puzzle = document.querySelector('.puzzle');        
 
@@ -348,23 +346,24 @@ window.addEventListener('DOMContentLoaded', function() {
         const puzzle = document.querySelector('.puzzle');        
 
         puzzle.innerHTML = '';
-        let sum = num * num
+        let summary = num * num
         let items = [];   
 
-        const valid = () => {
+        const valid = (num, summary) => {
 
-                const checkSolve = () => {
+                const checkSolve = (num, summary) => {
 
-                    const recursionShuffle = () => {
+                    const recursionShuffle = (num = 4, summary) => {
 
-                        let count = 4;
+                        let count = num;
                         let sum = 0;
                         let result = 0;  
+                        let summaryNumber = summary
 
                         let shuffleArray;
 
-                        const shuffleItemArray = () => {
-                            let sum = 16;
+                        const shuffleItemArray = (summaryNumber) => {
+                            let sum = summaryNumber;
                             let validArray = [] 
                     
                             for (let i = 0; i < sum; i++) {
@@ -390,8 +389,8 @@ window.addEventListener('DOMContentLoaded', function() {
                         };
     
     
-                        const getZeroPosition = (shuffleArray) => {
-                            let count = 4;
+                        const getZeroPosition = (shuffleArray, fieldSize) => {
+                            let count = fieldSize;
                             let copyArray = [...shuffleArray];
                             let row;
                             let resultArray = [];
@@ -415,7 +414,7 @@ window.addEventListener('DOMContentLoaded', function() {
                         while (result == 0) {
                             
                             
-                            shuffleArray = shuffleItemArray()
+                            shuffleArray = shuffleItemArray(summaryNumber)
                             console.log(shuffleArray);
                               for (let i = 0; i < count; i++) {
                                 if(i != 0) {
@@ -429,7 +428,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 
                         if(count % 2 == 0) {
     
-                          zeroPosition = getZeroPosition(shuffleArray);
+                          zeroPosition = getZeroPosition(shuffleArray, count);
                           console.log(zeroPosition);                     
                           
                           res =  sum + zeroPosition;    
@@ -456,19 +455,19 @@ window.addEventListener('DOMContentLoaded', function() {
                     }
 
                     
-                    return recursionShuffle();
+                    return recursionShuffle(num, summary);
                   
                 }
               
               
-            return checkSolve()
+            return checkSolve(num, summary)
 
         }
         
 
-        let arrayValidationTrue = valid()        
+        let arrayValidationTrue = valid(num = 4, summary)        
 
-        for (let i = 0; i < sum; i++) {            
+        for (let i = 0; i < summary; i++) {            
 
             arrayValidationTrue[i] === 0 ? items.push(`<div class='empty' data-number='${arrayValidationTrue[i]}'></div>`) : items.push(`<div class='puzzle__item' data-number='${arrayValidationTrue[i]}'>${arrayValidationTrue[i]}</div>`)
         } 
@@ -479,13 +478,13 @@ window.addEventListener('DOMContentLoaded', function() {
             return item
          }   
 
-        //return gameBlock
+        
 
         puzzle.innerHTML += `${mixArr(items)}`;
 
     }
 
-    shuffle()
+    shuffle(num = 4)
 
     const shuffleItem = (number) => {
 
@@ -525,14 +524,15 @@ window.addEventListener('DOMContentLoaded', function() {
         item.addEventListener('click', (e) => {
             
             const target = +e.target.dataset.number            
-            
+            console.log(target);
             puzzle.remove();
             destinyChoose.remove();
             destiny.remove();
             game(target + 3, classArray[index + target])
+            shuffleItem(target + 3)
             returnItems()
             reloadCLass()
-            shuffleItem(target + 3)
+            
         })
     })
 
