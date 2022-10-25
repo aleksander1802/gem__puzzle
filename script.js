@@ -363,7 +363,7 @@ window.addEventListener('DOMContentLoaded', function() {
             
             puz(e); 
             let winCompare = compare()
-            console.log(winCompare);
+            
             winCompare ? win() : 'NoN'; 
             
         })
@@ -585,7 +585,7 @@ window.addEventListener('DOMContentLoaded', function() {
                 game(target + 3, classArray[index + target])
                 shuffleItem(target + 3)
                 returnItems()
-                console.log(reloadCLass());
+                reloadCLass();
                 removeSound()
                 addSound()
             })
@@ -605,9 +605,7 @@ window.addEventListener('DOMContentLoaded', function() {
             const items = document.querySelectorAll('.puzzle__item')
             const zero = document.querySelector('.empty')
 
-            console.log(items);
-
-            
+                     
 
             items.forEach(item => {
                 item.removeAttribute('onclick')
@@ -616,14 +614,10 @@ window.addEventListener('DOMContentLoaded', function() {
             
             muteOff.addEventListener('click', removeSound)
         }
-
-
         
     
         const muteOff = document.getElementById('sad')
-        const muteOn = document.getElementById('fun')
-
-        console.log(muteOff);
+        const muteOn = document.getElementById('fun')        
 
         muteOff.addEventListener('click', removeSound)
 
@@ -634,9 +628,6 @@ window.addEventListener('DOMContentLoaded', function() {
             const muteOn = document.getElementById('fun')
             const items = document.querySelectorAll('.puzzle__item')
             const zero = document.querySelector('.empty')
-
-            console.log(items);
-
             
 
             items.forEach(item => {
