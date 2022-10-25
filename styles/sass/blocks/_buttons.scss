@@ -72,3 +72,22 @@
         color: black;
     }
 }
+
+.buttonFun {
+    margin: 20px;
+    width: 100px;
+    height: 40px;
+    background-color: cyan;
+    border: 1px solid black;
+    cursor: pointer;
+    &:hover {
+        background-color: black;
+        color: white;
+    }
+    &:active {
+        background-color: cyan;  
+        color: black;
+    }
+    
+
+}

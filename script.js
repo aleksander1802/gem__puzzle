@@ -38,6 +38,34 @@ window.addEventListener('DOMContentLoaded', function() {
     }
 
     buttons()
+
+    const volume = () => {
+
+        const buttons = document.querySelector('.buttons');
+
+        const volumeButtonOn = document.createElement('button')
+        volumeButtonOn.classList.add('buttonFun')
+        volumeButtonOn.id = 'fun'
+        volumeButtonOn.textContent = 'Volume On'
+        
+        const volumeButtonOff = document.createElement('button')
+        volumeButtonOff.classList.add('buttonFun')
+        volumeButtonOff.id = 'sad'
+        volumeButtonOff.textContent = 'Volume Off'
+
+        buttons.after(volumeButtonOn, volumeButtonOff)
+
+    }
+
+    volume()
+
+
+
+        
+        
+
+        
+
     
     
     const game = (num = 4, className = 'puzzle__default') => {
@@ -168,7 +196,7 @@ window.addEventListener('DOMContentLoaded', function() {
     
             for (let i = 0; i < summary; i++) {            
     
-                arrayValidationTrue[i] === 0 ? items.push(`<div class='empty' data-number='${arrayValidationTrue[i]}'></div>`) : items.push(`<div class='puzzle__item' data-number='${arrayValidationTrue[i]}'>${arrayValidationTrue[i]}</div>`)
+                arrayValidationTrue[i] === 0 ? items.push(`<div class='empty' data-number='${arrayValidationTrue[i]}' onclick="new Audio('laser.mp3').play()"></div>`) : items.push(`<div class='puzzle__item' data-number='${arrayValidationTrue[i]}' onclick="new Audio('laser.mp3').play()">${arrayValidationTrue[i]}</div>`)
             } 
     
             const mixArr = (array) => {
@@ -208,17 +236,7 @@ window.addEventListener('DOMContentLoaded', function() {
     puzzle.innerHTML = '';
 
 
-    // const step = () => {
-
-    //     const buttons = document.querySelector('.buttons');
-
-    //     const countDiv = document.createElement('div');
-    //     countDiv.classList.add('count')        
-    //     buttons.after(countDiv)
-
-    // }
-
-    // step()
+    
 
     
         
@@ -267,6 +285,16 @@ window.addEventListener('DOMContentLoaded', function() {
                     zero.innerText = data; 
                                       
                 }
+
+
+                
+
+
+
+
+
+
+
                 
                 
                 if(deltaY == 0 || deltaY == 1 && deltaX <= size) {
@@ -292,7 +320,7 @@ window.addEventListener('DOMContentLoaded', function() {
             const puzzle = document.querySelector('.puzzle');
 
             let currentArray = [...Array(puzzle.childElementCount)].map((_, i) => i + 1).join(', ').replace(`${puzzle.childElementCount}`, '0');  
-            console.log(currentArray);
+            
 
             let compareArray = []
 
@@ -302,7 +330,7 @@ window.addEventListener('DOMContentLoaded', function() {
              }
 
              let winArray = compareArray.join(', ')
-             console.log(winArray);
+             
     
              return winArray === currentArray && winArray.length > 0 && currentArray.length > 0
         }        
@@ -318,8 +346,7 @@ window.addEventListener('DOMContentLoaded', function() {
             
             zero = document.querySelector('.empty');
               
-            return move(target, zero);  
-            
+             move(target, zero); 
             
         }
         
@@ -332,7 +359,7 @@ window.addEventListener('DOMContentLoaded', function() {
             <input type='button' value="Try again" class='button__win' onClick="location.href=location.href"></input>`
         }
         
-         puzzle.addEventListener('click', (e)  => { // слушатель, обрабатывает клики, кажды раз вызывает функцию compare которая сравнивает значение изначального массива и массива который получаетя при движении плиток, в случае победы вызывает функцию win, та что выше
+         puzzle.addEventListener('click', (e)  => { 
             
             puz(e); 
             let winCompare = compare()
@@ -482,7 +509,7 @@ window.addEventListener('DOMContentLoaded', function() {
 
         for (let i = 0; i < summary; i++) {            
 
-            arrayValidationTrue[i] === 0 ? items.push(`<div class='empty' data-number='${arrayValidationTrue[i]}'></div>`) : items.push(`<div class='puzzle__item' data-number='${arrayValidationTrue[i]}'>${arrayValidationTrue[i]}</div>`)
+            arrayValidationTrue[i] === 0 ? items.push(`<div class='empty' data-number='${arrayValidationTrue[i]}' onclick="new Audio('laser.mp3').play()"></div>`) : items.push(`<div class='puzzle__item' data-number='${arrayValidationTrue[i]}' onclick="new Audio('laser.mp3').play()">${arrayValidationTrue[i]}</div>`)
         } 
 
         const mixArr = (array) => {
@@ -513,50 +540,56 @@ window.addEventListener('DOMContentLoaded', function() {
         
     }
 
-    const shuffleButton = document.querySelector('.buttons__shuffle');        
+     const shuffleButton = document.querySelector('.buttons__shuffle');        
 
         shuffleButton.addEventListener('click', () => {
 
             
-            shuffle(num)   
+            shuffle(num) 
+            
+            
             
         })
 
 
 
-    
+        
 
    
     
 
-    const returnItems = () => {
+        const returnItems = () => {
         
-        let classArray = ['puzzle__small', 'puzzle__default', 'puzzle__medium', 'puzzle__large', 'puzzle__super', 'puzzle__mega'];
-        let index = 0;
-        
-        const puzzle = document.querySelector('.puzzle');
-        
-        const destinyItems = document.querySelectorAll('.destiny__item');
-        const destinyChoose = document.querySelector('.destiny__choose');
-        const destiny = document.querySelector('.destiny');
-        
-        destinyItems.forEach(item => {
-        
-        item.addEventListener('click', (e) => {
+            let classArray = ['puzzle__small', 'puzzle__default', 'puzzle__medium', 'puzzle__large', 'puzzle__super', 'puzzle__mega'];
+            let index = 0;
             
-            const target = +e.target.dataset.number            
+            const puzzle = document.querySelector('.puzzle');
             
-            puzzle.remove();
-            destinyChoose.remove();
-            destiny.remove();
-            game(target + 3, classArray[index + target])
-            shuffleItem(target + 3)
-            returnItems()
-            console.log(reloadCLass());
+            const destinyItems = document.querySelectorAll('.destiny__item');
+            const destinyChoose = document.querySelector('.destiny__choose');
+            const destiny = document.querySelector('.destiny');
+
+
+
             
             
+            destinyItems.forEach(item => {
+        
+            item.addEventListener('click', (e) => {
+                
+                const target = +e.target.dataset.number            
+                
+                puzzle.remove();
+                destinyChoose.remove();
+                destiny.remove();
+                game(target + 3, classArray[index + target])
+                shuffleItem(target + 3)
+                returnItems()
+                console.log(reloadCLass());
+                removeSound()
+                addSound()
+            })
         })
-    })
 
            
     }
@@ -565,22 +598,58 @@ window.addEventListener('DOMContentLoaded', function() {
     
     
     
-    
 
-    
+        const removeSound = () => {
+
+            const muteOff = document.getElementById('sad')
+            const items = document.querySelectorAll('.puzzle__item')
+            const zero = document.querySelector('.empty')
+
+            console.log(items);
+
+            
+
+            items.forEach(item => {
+                item.removeAttribute('onclick')
+                zero.removeAttribute('onclick')
+            })
+            
+            muteOff.addEventListener('click', removeSound)
+        }
 
 
         
     
+        const muteOff = document.getElementById('sad')
+        const muteOn = document.getElementById('fun')
+
+        console.log(muteOff);
+
+        muteOff.addEventListener('click', removeSound)
 
     
-    
 
-    
+        const addSound = () => {
+
+            const muteOn = document.getElementById('fun')
+            const items = document.querySelectorAll('.puzzle__item')
+            const zero = document.querySelector('.empty')
+
+            console.log(items);
+
+            
+
+            items.forEach(item => {
+                item.setAttribute('onclick', "new Audio('laser.mp3').play()")
+                zero.setAttribute('onclick', "new Audio('laser.mp3').play()")
+            })
+            
+            muteOn.addEventListener('click', addSound)
+        }
 
 
 
-
+        muteOn.addEventListener('click', addSound)
 
 
 

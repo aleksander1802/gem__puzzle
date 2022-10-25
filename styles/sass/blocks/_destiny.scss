@@ -4,12 +4,13 @@
     padding: 20px;
     font-size: 30px;
     &__choose {
-        
+        width: 100%;
         padding: 20px;
         font-size: 30px;
         text-align: center;
         display: flex;
         flex-direction: row;
+        justify-content: space-between;
     }
     &__item {
         cursor: pointer;

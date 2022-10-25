@@ -172,6 +172,23 @@ body {
   color: black;
 }
 
+.buttonFun {
+  margin: 20px;
+  width: 100px;
+  height: 40px;
+  background-color: cyan;
+  border: 1px solid black;
+  cursor: pointer;
+}
+.buttonFun:hover {
+  background-color: black;
+  color: white;
+}
+.buttonFun:active {
+  background-color: cyan;
+  color: black;
+}
+
 .destiny {
   width: 100%;
   text-align: center;
@@ -179,6 +196,7 @@ body {
   font-size: 30px;
 }
 .destiny__choose {
+  width: 100%;
   padding: 20px;
   font-size: 30px;
   text-align: center;
@@ -189,6 +207,9 @@ body {
   -webkit-box-direction: normal;
       -ms-flex-direction: row;
           flex-direction: row;
+  -webkit-box-pack: justify;
+      -ms-flex-pack: justify;
+          justify-content: space-between;
 }
 .destiny__item {
   cursor: pointer;
